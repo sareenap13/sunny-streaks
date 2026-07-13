@@ -104,6 +104,9 @@ const continueBtn = document.getElementById("continue-btn");
 
 const newCycleBtn = document.getElementById("new-cycle-btn");
 const switchPlayerBtn = document.getElementById("switch-player-btn");
+const rulesBtn = document.getElementById("rules-btn");
+const rulesModal = document.getElementById("rules-modal");
+const rulesCloseBtn = document.getElementById("rules-close-btn");
 
 let gameId = null;
 let myRole = null; // "player1" | "player2"
@@ -478,6 +481,12 @@ switchPlayerBtn.addEventListener("click", () => {
   localStorage.removeItem(`ss_role_${gameId}`);
   myRole = null;
   goToWhoScreen();
+});
+
+rulesBtn.addEventListener("click", () => rulesModal.classList.remove("hidden"));
+rulesCloseBtn.addEventListener("click", () => rulesModal.classList.add("hidden"));
+rulesModal.addEventListener("click", (e) => {
+  if (e.target === rulesModal) rulesModal.classList.add("hidden");
 });
 
 // ---------- Boot ----------

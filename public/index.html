@@ -58,6 +58,7 @@
       </div>
       <div class="cycle-info">
         <span id="cycle-days-left">14 days left</span>
+        <button id="rules-btn" class="btn btn-ghost">📖 Rules</button>
         <button id="new-cycle-btn" class="btn btn-ghost">Start new cycle</button>
       </div>
     </header>
@@ -196,6 +197,34 @@
       <span>Game code: <strong id="footer-game-code"></strong></span>
       <button id="switch-player-btn" class="btn btn-ghost btn-tiny">Not you? Switch</button>
     </footer>
+  </div>
+
+  <!-- Rules modal -->
+  <div id="rules-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>📖 How scoring works</h2>
+        <button id="rules-close-btn" class="btn-close" title="Close">✕</button>
+      </div>
+      <ul class="rules-list">
+        <li><span class="rules-icon">💧</span> <span><strong>Water:</strong> +2 points for every 20 oz</span></li>
+        <li><span class="rules-icon">🚶</span> <span><strong>Steps:</strong> +1 point for every 10,000 steps</span></li>
+        <li>
+          <span class="rules-icon">🏋️</span>
+          <span>
+            <strong>Workout:</strong>
+            <ul class="rules-sublist">
+              <li>30–59 min = 2 points</li>
+              <li>60–89 min = 3 points</li>
+              <li>90+ min = 4 points</li>
+            </ul>
+          </span>
+        </li>
+        <li><span class="rules-icon">🧘</span> <span><strong>Mobility / stretching:</strong> +1 point for 15+ min</span></li>
+        <li><span class="rules-icon">😴</span> <span><strong>Sleep:</strong> +1 point for 7.5+ hours</span></li>
+      </ul>
+      <p class="rules-footnote">🔄 Scores reset every 14 days — the leader when the cycle ends gets bragging rights, then it's a fresh start.</p>
+    </div>
   </div>
 
   <script type="module" src="app.js"></script>
