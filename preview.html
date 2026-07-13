@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunny Streaks — Preview</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .preview-divider {
+    text-align: center;
+    padding: 8px;
+    background: #3a342b;
+    color: #fff;
+    font-family: system-ui, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="preview-divider">SCREEN 1 — JOIN / CREATE GAME</div>
+  <div class="screen">
+    <div class="join-card">
+      <h1>🌻 Sunny Streaks</h1>
+      <p class="subtitle">A friendly health competition, just the two of you.</p>
+      <div>
+        <button class="btn btn-primary">Start a new game</button>
+        <p class="or-divider">or</p>
+        <label>Enter a game code your friend shared</label>
+        <input type="text" placeholder="e.g. sunny-otter-42" />
+        <button class="btn btn-secondary">Join game</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-divider">SCREEN 2 — WHO ARE YOU</div>
+  <div class="screen">
+    <div class="join-card">
+      <h1>Who are you? 🙋</h1>
+      <p class="subtitle">Pick your side. Do this once per device.</p>
+      <div class="who-buttons">
+        <button class="btn btn-player who-btn">You</button>
+        <button class="btn btn-player who-btn">Bob</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview-divider">SCREEN 3 — MAIN GAME BOARD</div>
+  <div id="game-screen" style="min-height:auto;">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>🌻 Sunny Streaks</h1>
+      </div>
+      <div class="cycle-info">
+        <span>6 days left in this cycle</span>
+        <button class="btn btn-ghost">Start new cycle</button>
+      </div>
+    </header>
+
+    <section class="meter-section">
+      <div class="meter-labels">
+        <span class="meter-label p1">You</span>
+        <span class="meter-label p2">Bob</span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill p1" style="width:56%"></div>
+        <div class="meter-fill p2" style="width:44%"></div>
+      </div>
+      <div class="meter-scores">
+        <span class="meter-score p1">18 pts</span>
+        <span id="leader-badge">🏆 You lead</span>
+        <span class="meter-score p2">14 pts</span>
+      </div>
+    </section>
+
+    <main class="players-grid">
+      <article class="player-card p1">
+        <h2>You <span class="crown visible">👑</span></h2>
+        <p class="today-label">Today's log</p>
+
+        <form class="log-form">
+          <label>Water (oz)<input type="number" value="60" /></label>
+          <label>Steps<input type="number" value="8200" /></label>
+          <label>Workout (minutes)<input type="number" value="45" /></label>
+          <label class="checkbox-label"><input type="checkbox" checked />Mobility / stretching (15+ min)</label>
+          <label class="checkbox-label"><input type="checkbox" checked />Slept 7.5+ hours</label>
+          <button type="button" class="btn btn-primary btn-save">Save today</button>
+          <p class="save-status">Saved ✓</p>
+        </form>
+
+        <div class="breakdown">
+          <div class="breakdown-total">18 pts this cycle</div>
+          <ul class="breakdown-list">
+            <li>💧 Water <span>6</span></li>
+            <li>🚶 Steps <span>4</span></li>
+            <li>🏋️ Workouts <span>6</span></li>
+            <li>🧘 Mobility <span>1</span></li>
+            <li>😴 Sleep <span>1</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="player-card p2">
+        <h2>Bob</h2>
+        <p class="today-label">Today's log</p>
+
+        <form class="log-form">
+          <label>Water (oz)<input type="number" value="40" disabled /></label>
+          <label>Steps<input type="number" value="11400" disabled /></label>
+          <label>Workout (minutes)<input type="number" value="30" disabled /></label>
+          <label class="checkbox-label"><input type="checkbox" disabled />Mobility / stretching (15+ min)</label>
+          <label class="checkbox-label"><input type="checkbox" checked disabled />Slept 7.5+ hours</label>
+        </form>
+
+        <div class="breakdown">
+          <div class="breakdown-total">14 pts this cycle</div>
+          <ul class="breakdown-list">
+            <li>💧 Water <span>4</span></li>
+            <li>🚶 Steps <span>5</span></li>
+            <li>🏋️ Workouts <span>2</span></li>
+            <li>🧘 Mobility <span>0</span></li>
+            <li>😴 Sleep <span>1</span></li>
+          </ul>
+        </div>
+      </article>
+    </main>
+
+    <section class="history-section">
+      <h3>Past cycles</h3>
+      <ul class="history-list">
+        <li><span>2026-06-15 → 2026-06-29</span><span>22 – 25 &nbsp; 🏆 Bob</span></li>
+        <li><span>2026-06-01 → 2026-06-15</span><span>19 – 19 &nbsp; 🤝 tie</span></li>
+      </ul>
+    </section>
+
+    <footer class="game-footer">
+      <span>Game code: <strong>sunny-otter-42</strong></span>
+      <button class="btn btn-ghost btn-tiny">Not you? Switch</button>
+    </footer>
+  </div>
+
+</body>
+</html>

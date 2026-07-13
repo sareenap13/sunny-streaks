@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunny Streaks 🌻</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Shown until the two players are connected to the same game -->
+  <div id="join-screen" class="screen">
+    <div class="join-card">
+      <h1>🌻 Sunny Streaks</h1>
+      <p class="subtitle">A friendly health competition, just the two of you.</p>
+
+      <div id="join-new">
+        <button id="create-game-btn" class="btn btn-primary">Start a new game</button>
+        <p class="or-divider">or</p>
+        <label for="join-code-input">Enter a game code your friend shared</label>
+        <input id="join-code-input" type="text" placeholder="e.g. sunny-otter-42" autocomplete="off" />
+        <button id="join-game-btn" class="btn btn-secondary">Join game</button>
+      </div>
+
+      <div id="join-share" class="hidden">
+        <p>Share this link or code with your friend so you're synced:</p>
+        <div class="share-box">
+          <input id="share-link-input" type="text" readonly />
+          <button id="copy-link-btn" class="btn btn-small">Copy link</button>
+        </div>
+        <p class="share-code">Code: <strong id="share-code-text"></strong></p>
+        <button id="continue-btn" class="btn btn-primary">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shown once a game is joined, before picking which player you are -->
+  <div id="who-screen" class="screen hidden">
+    <div class="join-card">
+      <h1>Who are you? 🙋</h1>
+      <p class="subtitle">Pick your side. Do this once per device.</p>
+      <div class="who-buttons">
+        <button class="btn btn-player who-btn" data-player="player1">
+          <span id="who-name-1">Player 1</span>
+        </button>
+        <button class="btn btn-player who-btn" data-player="player2">
+          <span id="who-name-2">Player 2</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main game screen -->
+  <div id="game-screen" class="screen hidden">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1>🌻 Sunny Streaks</h1>
+      </div>
+      <div class="cycle-info">
+        <span id="cycle-days-left">14 days left</span>
+        <button id="new-cycle-btn" class="btn btn-ghost">Start new cycle</button>
+      </div>
+    </header>
+
+    <section class="calendar-section">
+      <div class="calendar-header">
+        <h3>This cycle</h3>
+        <div class="calendar-legend">
+          <span><span class="cal-dot p1 filled"></span> <span id="cal-legend-1">Player 1</span></span>
+          <span><span class="cal-dot p2 filled"></span> <span id="cal-legend-2">Player 2</span></span>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </section>
+
+    <section class="meter-section">
+      <div class="meter-labels">
+        <span id="meter-name-1" class="meter-label p1">Player 1</span>
+        <span id="meter-name-2" class="meter-label p2">Player 2</span>
+      </div>
+      <div class="meter-bar">
+        <div id="meter-fill-1" class="meter-fill p1"></div>
+        <div id="meter-fill-2" class="meter-fill p2"></div>
+      </div>
+      <div class="meter-scores">
+        <span id="meter-score-1" class="meter-score p1">0 pts</span>
+        <span id="leader-badge">🤝 tied</span>
+        <span id="meter-score-2" class="meter-score p2">0 pts</span>
+      </div>
+    </section>
+
+    <p class="scroll-hint">↓ Scroll down to log today</p>
+
+    <main class="players-grid">
+      <article class="player-card p1" id="card-player1">
+        <h2><span id="display-name-1">Player 1</span> <button type="button" class="btn-rename" data-player="player1" title="Rename">✏️</button> <span class="crown" id="crown-1">👑</span></h2>
+        <p class="today-label">Today so far — add as you go</p>
+
+        <div class="metric-add" data-player="player1" data-metric="waterOz">
+          <div class="metric-today">💧 Water <strong><span id="today-waterOz-player1">0</span> oz</strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" inputmode="numeric" placeholder="oz" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <div class="metric-add" data-player="player1" data-metric="steps">
+          <div class="metric-today">🚶 Steps <strong><span id="today-steps-player1">0</span></strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" step="100" inputmode="numeric" placeholder="steps" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <div class="metric-add" data-player="player1" data-metric="workoutMinutes">
+          <div class="metric-today">🏋️ Workout <strong><span id="today-workoutMinutes-player1">0</span> min</strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" inputmode="numeric" placeholder="min" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" class="metric-toggle" data-player="player1" data-metric="mobility" />
+          Mobility / stretching (15+ min)
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" class="metric-toggle" data-player="player1" data-metric="sleep" />
+          Slept 7.5+ hours
+        </label>
+        <p class="save-status" id="save-status-player1"></p>
+
+        <div class="breakdown">
+          <div class="breakdown-total">
+            <span id="total-player1">0</span> pts this cycle
+          </div>
+          <ul class="breakdown-list" id="breakdown-player1"></ul>
+        </div>
+      </article>
+
+      <article class="player-card p2" id="card-player2">
+        <h2><span id="display-name-2">Player 2</span> <button type="button" class="btn-rename" data-player="player2" title="Rename">✏️</button> <span class="crown" id="crown-2">👑</span></h2>
+        <p class="today-label">Today so far — add as you go</p>
+
+        <div class="metric-add" data-player="player2" data-metric="waterOz">
+          <div class="metric-today">💧 Water <strong><span id="today-waterOz-player2">0</span> oz</strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" inputmode="numeric" placeholder="oz" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <div class="metric-add" data-player="player2" data-metric="steps">
+          <div class="metric-today">🚶 Steps <strong><span id="today-steps-player2">0</span></strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" step="100" inputmode="numeric" placeholder="steps" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <div class="metric-add" data-player="player2" data-metric="workoutMinutes">
+          <div class="metric-today">🏋️ Workout <strong><span id="today-workoutMinutes-player2">0</span> min</strong></div>
+          <div class="add-row">
+            <input type="number" class="add-input" min="0" inputmode="numeric" placeholder="min" />
+            <button type="button" class="btn btn-small btn-add">+ Add</button>
+          </div>
+        </div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" class="metric-toggle" data-player="player2" data-metric="mobility" />
+          Mobility / stretching (15+ min)
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" class="metric-toggle" data-player="player2" data-metric="sleep" />
+          Slept 7.5+ hours
+        </label>
+        <p class="save-status" id="save-status-player2"></p>
+
+        <div class="breakdown">
+          <div class="breakdown-total">
+            <span id="total-player2">0</span> pts this cycle
+          </div>
+          <ul class="breakdown-list" id="breakdown-player2"></ul>
+        </div>
+      </article>
+    </main>
+
+    <section class="history-section">
+      <h3>Past cycles</h3>
+      <ul id="history-list" class="history-list">
+        <li class="history-empty">No completed cycles yet — this is the first one!</li>
+      </ul>
+    </section>
+
+    <footer class="game-footer">
+      <span>Game code: <strong id="footer-game-code"></strong></span>
+      <button id="switch-player-btn" class="btn btn-ghost btn-tiny">Not you? Switch</button>
+    </footer>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
