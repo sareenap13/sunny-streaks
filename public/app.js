@@ -48,7 +48,8 @@ function daysToDateStr(days) {
 }
 
 function computePoints(entry) {
-  const waterPts = Math.floor((entry.waterOz || 0) / 20) * 2;
+  const waterOz = entry.waterOz || 0;
+  const waterPts = waterOz < 20 ? 0 : Math.round(((waterOz / 20) * 2 + Number.EPSILON) * 100) / 100;
   const stepsPts = Math.floor((entry.steps || 0) / 10000) * 1;
   const mins = entry.workoutMinutes || 0;
   let workoutPts = 0;
@@ -268,6 +269,11 @@ function totalsForCycle(cycleKey) {
     t.mobility += pts.mobility;
     t.sleep += pts.sleep;
     t.total += pts.total;
+  }
+  for (const role of ["player1", "player2"]) {
+    for (const key of ["water", "steps", "workout", "mobility", "sleep", "total"]) {
+      totals[role][key] = Math.round((totals[role][key] + Number.EPSILON) * 100) / 100;
+    }
   }
   return totals;
 }
